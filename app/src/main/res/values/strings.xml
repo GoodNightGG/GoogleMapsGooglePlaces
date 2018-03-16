@@ -1,0 +1,10 @@
+<resources>
+
+    <string name="google_maps_API_key">AIzaSyCwLNsDYfV5FiiHXQBVHAQwLbj2FJuLZ4Y</string>
+    <string name="searching_hint">搜尋 Google地圖</string>
+    <string name="Location_title">您的位置</string>
+    <string name="app_name">GoogleMapsGooglePlaces</string>
+
+
+
+</resources>
