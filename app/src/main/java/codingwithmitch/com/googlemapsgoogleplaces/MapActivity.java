@@ -1,6 +1,5 @@
 package codingwithmitch.com.googlemapsgoogleplaces;
 
-import android.*;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -19,7 +18,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -136,7 +134,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent keyEvent) {
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 if(actionId == EditorInfo.IME_ACTION_SEARCH
                         || actionId == EditorInfo.IME_ACTION_DONE
                         || keyEvent.getAction() == KeyEvent.ACTION_DOWN
@@ -152,7 +150,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         mGps.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked gps icon");
                 getDeviceLocation();
             }
@@ -160,7 +158,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         mInfo.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked place info");
                 try {
                     if(mMarker.isInfoWindowShown()) {
@@ -174,8 +172,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 }
             }
         });
-
-
 
         hideSoftKeyboard();
     }
@@ -242,6 +238,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         mMap.clear();
 
+        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapActivity.this));
+
         if(placeInfo != null){
             try{
                 String snippet = "Address: " + placeInfo.getAddress() + "\n" +
@@ -268,12 +266,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private void moveCamera(LatLng latLng, float zoom, String title){
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+
         if(!title.equals("我的位置")){
             MarkerOptions options = new MarkerOptions()
                     .position(latLng)
                     .title(title);
             mMap.addMarker(options);
         }
+
         hideSoftKeyboard();
     }
 
