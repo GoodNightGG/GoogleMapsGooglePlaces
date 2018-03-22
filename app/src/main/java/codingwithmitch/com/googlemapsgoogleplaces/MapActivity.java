@@ -108,10 +108,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private GoogleApiClient mGoogleApiClient;
     private PlaceInfo mPlace;
     private Marker mMarker;
-    double latitude, longitude;
-    double end_latitude, end_longitude;
-    private String url ;
-    Object dataTransfer[] = new Object[2];
+    //double latitude, longitude;
+    //double end_latitude, end_longitude;
+    //private String url ;
+   // Object dataTransfer[] = new Object[2];
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -167,12 +167,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         });
 
-        mGetdirctions.setOnClickListener(new View.OnClickListener() {
+      /*  mGetdirctions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Log.d(TAG, "onClick: clicked directions icon");
             }
-        });
+        });*/
 
         mInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -278,7 +278,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
-    private void getDirctions(){
+   /* private void getDirctions(){
         dataTransfer = new Object[3];
         url = getDirectionsUrl();
         GetDirectionsData getDirectionsData = new GetDirectionsData();
@@ -286,9 +286,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         dataTransfer[1] = url;
         dataTransfer[2] = new LatLng(end_latitude, end_longitude);
         getDirectionsData.execute(dataTransfer);
-    }
+    }*/
 
-    private String getDirectionsUrl()
+    /*private String getDirectionsUrl()
     {
         StringBuilder googleDirectionsUrl = new StringBuilder("https://maps.googleapis.com/maps/api/directions/json?");
         googleDirectionsUrl.append("origin="+latitude+","+longitude);
@@ -296,7 +296,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         googleDirectionsUrl.append("&key="+"AIzaSyCAcfy-02UHSu2F6WeQ1rhQhkCr51eBL9g");
 
         return googleDirectionsUrl.toString();
-    }
+    }*/
 
     private void moveCamera(LatLng latLng, float zoom, PlaceInfo placeInfo){
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
